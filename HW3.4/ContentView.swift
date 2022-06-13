@@ -25,11 +25,10 @@ struct ContentView: View {
             Button("Get Score") {
                 alertIsPresented = true
             }
-            .alert(
-                "Your Score", isPresented: $alertIsPresented, actions: {}) {
-                    Text("\(computeScore())")
-                }
-                .padding(.bottom)
+            .alert("Your Score", isPresented: $alertIsPresented, actions: {}) {
+                Text("\(computeScore())")
+            }
+            .padding(.bottom)
             Button("New Target") {
                 targetValue = Int.random(in: 0...100)
             }
