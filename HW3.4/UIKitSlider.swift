@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct UIKitSlider: UIViewRepresentable {
-    
     @Binding var sliderValue: Double
     let opacity: Int
     
@@ -17,6 +16,7 @@ struct UIKitSlider: UIViewRepresentable {
         
         slider.minimumValue = 0
         slider.maximumValue = 100
+        slider.tintColor = .black
         slider.addTarget(
             context.coordinator,
             action: #selector(Coordinator.onChange),
@@ -28,7 +28,7 @@ struct UIKitSlider: UIViewRepresentable {
     
     func updateUIView(_ uiView: UISlider, context: Context) {
         uiView.value = Float(sliderValue)
-        uiView.thumbTintColor = UIColor(.green).withAlphaComponent(CGFloat(opacity / 100))
+        uiView.thumbTintColor = .systemBlue.withAlphaComponent(CGFloat(opacity) / 100)
     }
     
     func makeCoordinator() -> Coordinator {
