@@ -11,26 +11,26 @@ import SwiftUI
 struct ContentView: View {
     @State private var targetValue = Int.random(in: 0...100)
     @State private var currentValue = 50.0
+    @State private var alertIsPresented = false
     
     var body: some View {
         VStack {
-            Text("Get as close a possible to: \(targetValue)")
+            Text("Get as close as possible to: \(targetValue)")
             HStack {
                 Text("  0")
-                Slider(value: $currentValue, in: 0...100, step: 1)
-                    .tint(.green)
+                UIKitSlider(sliderValue: $currentValue, opacity: computeScore())
                 Text("100")
             }
-            UIKitSlider(sliderValue: $currentValue, opacity: computeScore())
-            Text("\(currentValue)")
-            Text("\(computeScore())")
-            Color(.green)
-                .frame(width: 100, height: 100)
-                .opacity(Double(computeScore()) / 100)
+            .padding(.vertical)
             Button("Get Score") {
-                // Alert with result
+                alertIsPresented = true
             }
-            Button("New Value") {
+            .alert(
+                "Your Score", isPresented: $alertIsPresented, actions: {}) {
+                    Text("\(computeScore())")
+                }
+                .padding(.bottom)
+            Button("New Target") {
                 targetValue = Int.random(in: 0...100)
             }
         }
